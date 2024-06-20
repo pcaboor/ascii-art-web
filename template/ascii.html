@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Art Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+</head>
+<body>
+   
+   
+    <div class="container">
+        <h1>
+            <i class="fa-solid fa-wand-sparkles"></i> ASCII Art Generator
+            <span class="subtitle">version 1.1.0</span>
+        </h1>
+        <form action="/result" method="post" id="ascii-form">
+            <label for="text">Text:</label>
+            <textarea style="background-color: black; color: white;" id="text" name="text" rows="4"  required placeholder="write your text"></textarea>
+            <div id="error-message" style="color: red; display: none;">Please enter only ASCII characters!</div>
+            <br>
+            <label for="banner">Banner:</label>
+            <select id="banner" name="banner" required>
+                <option value="shadow">Shadow</option>
+                <option value="standard">Standard</option>
+                <option value="thinkertoy">Thinkertoy</option>
+                <option value="train">Train</option>
+            </select>
+            <br>
+            <button type="submit" id="genbtn"><i ></i> Generate</button>
+            <input type="button" value="Go back !" onclick="history.back()">
+        </form>
+    </div>
+    <div class="emoji-container" id="emoji-container"></div>
+
+    <div id="loading-screen" style="display: none;">
+        <p id="loading-text">
+            <span>L</span><span>o</span><span>a</span><span>d</span><span>i</span><span>n</span><span>g</span><span>.</span><span>.</span><span>.</span>
+        </p>
+    </div>
+
+    <script src="/static/script.js"></script>
+    <script>
+        document.getElementById('ascii-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the default form submission
+            const form = this;
+    
+            // Show the loading screen with fade in effect
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.display = 'flex';
+            setTimeout(() => {
+                loadingScreen.style.opacity = 1;
+            }, 10);  // Small timeout to trigger CSS transition
+    
+            // Animate the loading text
+            const letters = document.querySelectorAll('#loading-text span');
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.opacity = 1;
+                    letter.style.animationDelay = `${index * 0.2}s`;  // Adjust the delay as needed
+                }, index * 200);  // Delay before showing each letter
+            });
+    
+            // Simulate a longer loading time (e.g., 3 seconds)
+            setTimeout(() => {
+                // Fade out the loading screen
+                loadingScreen.style.opacity = 1;
+    
+                // Wait for the fade out effect to complete before proceeding
+                setTimeout(() => {
+                    // Submit the form via JavaScript
+                    const formData = new FormData(form);
+                    fetch(form.action, {
+                        method: form.method,
+                        body: formData
+                    }).then(response => response.text())
+                      .then(html => {
+                          document.open();
+                          document.write(html);
+                          document.close();
+                      });
+                }, 1000);  // Match the CSS transition duration
+            }, 1000);  // Adjust this duration as needed
+        });
+
+        //---------------/!\
+        document.getElementById('text').addEventListener('input', function() {
+            const genbtn = document.getElementById("genbtn")
+            const text = this.value;
+            const regex = /[^\x00-\x7F]/; // Matches any character outside of ASCII range
+            const errorMessage = document.getElementById('error-message');
+            if (regex.test(text)) {
+                errorMessage.style.display = 'block';
+                genbtn.setAttribute("disabled", "")
+                genbtn.style.backgroundColor = "#111"
+                genbtn.style.color = "#777"
+                genbtn.style.cursor = "not-allowed"
+            } else {
+                errorMessage.style.display = 'none';
+                genbtn.removeAttribute("disabled")
+                genbtn.style.backgroundColor = "#333"
+                genbtn.style.color = "#fff"
+                genbtn.style.cursor = "pointer"
+            }
+        });
+    </script>
+    
+</body>
+</html>

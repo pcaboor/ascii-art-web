@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        @font-face {
+    font-family: 'Minecraft';
+    src: url('/static/fonts/Minecraft.ttf') format('truetype');
+}
+        body {
+            vertical-align: middle;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: black;
+            color: white;
+            font-family: 'Minecraft'
+        }
+        
+    
+
+
+        .scrollable-div {
+            overflow: auto;
+            scrollbar-color: grey, black;
+           
+          
+            max-width: 100%;
+        }
+     
+        #result {
+            background-color: black; /* Couleur de fond noire */
+            color: white; /* Couleur du texte blanc */
+            padding: 10px; /* Espacement interne */
+            max-height: 300px; /* Hauteur maximale pour le scroll */
+            overflow-y: scroll; /* Activer le défilement vertical */
+        }
+
+        /* Styles for scrollbar */
+        /* WebKit browsers */
+        #result::-webkit-scrollbar {
+            width: 12px;
+        }
+        #result::-webkit-scrollbar-track {
+            background-color: black;
+        }
+        #result::-webkit-scrollbar-thumb {
+            background-color: rgb(59, 58, 58);
+            border-radius: 20px;
+            border: 3px solid transparent;
+            border-right: none;
+            border-left: none;
+        }
+        #result::-webkit-scrollbar-corner {
+            background-color: black;
+        }
+       
+       
+      
+        button {
+    background-color: #333;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+   
+    font-family: 'Minecraft', cursive;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wrapper {
+            display: inline-block;
+            margin-top: 20px; /* Adjust margin as needed */
+        }
+        .form-wrapper form {
+            margin-right: 10px; /* Spacing between forms */
+        }
+
+
+button i {
+    margin-right: 5px;
+}
+        
+
+    </style>
+</head>
+<body>
+  
+       
+            <h1 >Your Result</h1>
+            <pre id="result">{{ .Result }}</pre>
+     
+        <div class="form-wrapper">
+            <form action="/download" method="get">
+                <input type="hidden" name="file" value="{{ .FilePath }}">
+                <button type="submit">Download</button>
+            </form>
+            <br>
+            <form action="/ascii-art" method="post">
+                <button type="submit">Retry :)</button>
+            </form>
+        </div>
+   
+    <script src="/static/script.js"></script>
+</body>
+</html>

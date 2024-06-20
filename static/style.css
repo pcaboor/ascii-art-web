@@ -1,0 +1,277 @@
+@font-face {
+    font-family: 'Minecraft';
+    src: url('/static/fonts/Minecraft.ttf') format('truetype');
+}
+
+body {
+
+    margin: 0;
+    padding: 0;
+    background-color: black;  /* Set background to black */
+    color: white;  /* Set text color to white for contrast */
+    display: flex;
+    justify-content: center;
+    font-family: 'Minecraft', cursive;
+    align-items: center;
+    height: 100vh;  /* Full viewport height */
+    overflow: scroll;  /* Prevent scrollbars from showing */
+}
+
+.emoji-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;  /* Allows clicks to pass through the emojis */
+    overflow: hidden;  /* Ensure emojis don't cause scrollbars */
+    z-index: 1;
+}
+
+.emoji-container > * {
+    z-index: 1;
+}
+
+.emoji {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 10s infinite ease-in-out;
+    opacity: 0.8;  /* Slight transparency */
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+.container {
+    padding: 20px;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: left;
+    background-color: #000; /* Background color to make the glow more visible */
+    animation: rgb-glow 2s infinite alternate;
+    z-index: 2;
+}
+
+.container > * * {
+    z-index: 2;
+}
+
+h1 {
+    color: #ccc;  /* Light gray color for the header */
+    font-family: 'Minecraft', cursive;  /* Minecraft font */
+    position: relative;
+}
+
+.subtitle {
+    display: block;
+    font-size: 0.6em;  /* Smaller font size */
+    color: yellow;  /* Yellow color for the subtitle */
+    position: absolute;
+    font-family: 'Minecraft', cursive;
+    right: 0;  /* Align to the right */
+    bottom: -20px;  /* Position below the title */
+    animation: animateSubtitle 2s infinite alternate; /* Apply animation */
+}
+
+@keyframes animateSubtitle {
+    0% {
+        transform: translateX(0) scale(1);  /* Start position */
+    }
+    50% {
+        transform: translateX(5px) scale(1.1);  /* Move and scale slightly */
+    }
+    100% {
+        transform: translateX(0) scale(1);  /* Return to start position */
+    }
+}
+
+.background-gif {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('https://img.craftpix.net/2022/10/Free-Sky-with-Clouds-Background-Pixel-Art9.jpg') no-repeat center center fixed;
+    background-size: cover;
+    
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Minecraft', cursive;
+}
+
+input, select, button {
+    margin-top: 10px;
+    background-color: #333;  /* Dark background for inputs and button */
+    color: white;  /* White text for inputs and button */
+    border: 1px solid #ccc;  /* Light gray border */
+    padding: 5px;
+    width: 100%;
+    font-family: 'Minecraft', cursive;
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Minecraft', cursive;
+}
+
+input:hover, select:hover, button:hover {
+    cursor: pointer;
+}
+
+button i {
+    margin-right: 5px;
+}
+
+pre {
+    background-color: #333;  /* Dark background for preformatted text */
+    color: white;  /* White text for preformatted text */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+textarea {
+    font-family: 'Minecraft', cursive;
+}
+
+@keyframes rgb-glow {
+    0% {
+        box-shadow: 0 0 1px #ff0000, 0 0 2px #ff0000, 0 0 5px #ff0000, 0 0 8px #ff0000, 0 0 10px #ff0000;
+    }
+    33% {
+        box-shadow: 0 0 1px #00ff00, 0 0 2px #00ff00, 0 0 5px #00ff00, 0 0 8px #00ff00, 0 0 10px #00ff00;
+    }
+    66% {
+        box-shadow: 0 0 1px #0000ff, 0 0 2px #0000ff, 0 0 5px #0000ff, 0 0 8px #0000ff, 0 0 10px #0000ff;
+    }
+    100% {
+        box-shadow: 0 0 1px #ff0000, 0 0 2px #ff0000, 0 0 5px #ff0000, 0 0 8px #ff0000, 0 0 10px #ff0000;
+    }
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+a {
+    color: #ffff;  /* Default link color */
+    text-decoration: none;  /* Remove underline */
+    transition: color 0.3s, background-color 0.3s;  /* Smooth transition for hover effects */
+    font-family: 'Minecraft', cursive;  /* Apply Minecraft font */
+    background-color: transparent;  /* Transparent background for links */
+    padding: 5px 10px;  /* Padding around link text */
+    border-radius: 5px;  /* Rounded corners for link background */
+}
+
+a:hover {
+    color: #0056b3;  /* Change link color on hover */
+    background-color: rgba(255, 255, 255, 0.1);  /* Light background on hover */
+}
+
+pre {
+    background-color: black;
+    color: #fff;
+    text-align: left;
+}
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;  /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+    flex-direction: column;
+    transition: opacity 1s ease-in-out;
+}
+
+#loading-screen p {
+    color: white;
+    font-family: 'Minecraft', cursive;
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#loading-text span {
+    opacity: 0;  /* Hide all letters initially */
+    font-family: 'Minecraft', cursive;
+    color: white;
+    font-size: 1.2em;
+    animation: fadeIn 1s forwards;  /* Animation to fade in each letter */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animation pour la transition entre les pages */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    animation: slide-left 1s both;
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Animation pour l'entrée de la page depuis la droite */
+.page-enter {
+    position: fixed;
+    top: 0;
+    right: 100%; /* Commence à l'extérieur de l'écran */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    animation: slide-from-right 1s both;
+}
+
+@keyframes slide-from-right {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}

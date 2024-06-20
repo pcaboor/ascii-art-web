@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - ENV=development
+    container_name: ascii-art-web
+    labels:
+      - test
+      - com.example.environment=production    
